@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTS.NET", "XTS.NET.csproj", "{DB2D8001-9562-4042-883D-69D4C75E647C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTS.NET", "src\XTS.NET.csproj", "{DB2D8001-9562-4042-883D-69D4C75E647C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTS.NET.Tests", "tests\XTS.NET.Tests.csproj", "{AE300E49-FCCD-45D6-A32C-6E133148DF02}"
 EndProject

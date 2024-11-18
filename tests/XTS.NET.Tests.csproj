@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\XTS.NET.csproj" />
+    <ProjectReference Include="..\src\XTS.NET.csproj" />
   </ItemGroup>
 
 </Project>
