@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTS.NET", "XTS.NET.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTS.NET.Tests", "tests\XTS.NET.Tests.csproj", "{AE300E49-FCCD-45D6-A32C-6E133148DF02}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTS.NET.Benchmarks", "XTS.NET.Benchmarks\XTS.NET.Benchmarks.csproj", "{652E2CC9-C97C-479E-82E4-F9DEF839149C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{AE300E49-FCCD-45D6-A32C-6E133148DF02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE300E49-FCCD-45D6-A32C-6E133148DF02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE300E49-FCCD-45D6-A32C-6E133148DF02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{652E2CC9-C97C-479E-82E4-F9DEF839149C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{652E2CC9-C97C-479E-82E4-F9DEF839149C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{652E2CC9-C97C-479E-82E4-F9DEF839149C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{652E2CC9-C97C-479E-82E4-F9DEF839149C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

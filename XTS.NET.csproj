@@ -9,8 +9,11 @@
   <ItemGroup>
     <Compile Remove="tests\**" />
     <Compile Remove="test_case_gen\**" />
+    <Compile Remove="XTS.NET.Benchmarks\**" />
     <EmbeddedResource Remove="tests\**" />
     <EmbeddedResource Remove="test_case_gen\**" />
+    <EmbeddedResource Remove="XTS.NET.Benchmarks\**" />
+    <None Remove="XTS.NET.Benchmarks\**" />
     <None Remove="tests\**" />
     <None Remove="test_case_gen\**" />
   </ItemGroup>
