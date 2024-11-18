@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="tests\**" />
+    <Compile Remove="test_case_gen\**" />
+    <EmbeddedResource Remove="tests\**" />
+    <EmbeddedResource Remove="test_case_gen\**" />
+    <None Remove="tests\**" />
+    <None Remove="test_case_gen\**" />
+  </ItemGroup>
+
+</Project>
