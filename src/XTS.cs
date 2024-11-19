@@ -146,20 +146,15 @@ namespace XTS.NET
                 int previousBlockStart = bufferOffset + (nFullBlocks - 1) * blockSize;
                 int currentBlockStart = previousBlockStart + blockSize;
 
+                // Define the spans
                 Span<byte> bufferSpan = buffer.AsSpan();
                 Span<byte> previousBlockSpan = bufferSpan[previousBlockStart..currentBlockStart];
                 Span<byte> currentBlockSpan = bufferSpan[currentBlockStart..(bufferOffset + bufferLength)];
 
-                // Buffer last bytes
-                byte[] remainingBytesArray = currentBlockSpan.ToArray();
+                // We copy part of the previous ciphertext at the end and replace it with the plaintext of the last block
+                SwapSpan(previousBlockSpan[..remainingBytes], currentBlockSpan);
 
-                // We copy part of the previous ciphertext at the end
-                previousBlockSpan[..remainingBytes].CopyTo(currentBlockSpan);
-
-                // We compute the last block on the previous block
-                // We only need to copy the start of the last block, as the end of the previous block is already there
-                remainingBytesArray.AsSpan().CopyTo(previousBlockSpan);
-
+                // We encrypt/decrypt the second to last block
                 TransformBlock(alg, buffer, previousBlockStart, tweak);
             }
         }
@@ -207,6 +202,16 @@ namespace XTS.NET
             for (int i = 0; i < output.Length; i++)
             {
                 output[i] ^= input[i];
+            }
+        }
+
+        private static void SwapSpan(Span<byte> x, Span<byte> y)
+        {
+            for (int i = 0; i < x.Length; i++)
+            {
+                byte tmp = x[i];
+                x[i] = y[i];
+                y[i] = tmp;
             }
         }
 
