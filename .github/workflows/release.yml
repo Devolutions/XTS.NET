@@ -32,11 +32,10 @@ jobs:
         github_token: ${{ secrets.DEVOLUTIONSBOT_TOKEN }}
 
     - name: Download Nugets Artifact
+      run: dv github download-artifact nugets . XTS.NET
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         CI: true
-      run: |
-        dv github download-artifact nugets . XTS.NET
 
     - name: Extract Artifacts
       run: |
