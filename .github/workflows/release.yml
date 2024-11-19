@@ -6,11 +6,11 @@ on:
         description: "Publish Devolutions.XTS.NET"
         required: true
         type: boolean
-
       publish_dry_run:
         description: "Dry Run Mode"
         required: true
         type: boolean
+        
 jobs:
   deploy:
     runs-on: ubuntu-latest
