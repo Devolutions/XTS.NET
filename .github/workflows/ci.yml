@@ -28,9 +28,8 @@ jobs:
       run: dotnet test
 
     - name: Generate NuGet
-      run: |
-        cd src/
-        dotnet pack -o package /p:Version=$(date "+%-Y.%-m.%-d")
+      run: dotnet pack -o package /p:Version=$(date "+%-Y.%-m.%-d")
+      working-directory: src
 
     - uses: actions/upload-artifact@v4.3.6
       with:
