@@ -6,7 +6,18 @@ namespace XTS.NET
 {
     public static class XTS
     {
+        // Derived from polynomial x^128 + x^7 + x^2 + x + 1
         private const byte GF_MOD = 135;
+
+        /// <summary>
+        /// Encrypt multiple sectors of data using XTS mode
+        /// </summary>
+        /// <param name="alg">A SymmetricAlgorithm representing the underlying block cipher. In a regular scenario, you can use Aes.Create() to get this.</param>
+        /// <param name="input">The data to encrypt</param>
+        /// <param name="key">The key to use. Note that XTS mode uses a key twice the underlying size of the block cipher.</param>
+        /// <param name="sectorNum">The sector number, also known as the tweak. This is the equivalent of the IV/Nonce for other modes.</param>
+        /// <param name="sectorSize">The size of a sector. This function allows encrypting multiple sector. Use the Sector variants if you don't care about this.</param>
+        /// <returns>The encrypted data</returns>
         public static byte[] EncryptXts(this SymmetricAlgorithm alg, ReadOnlySpan<byte> input, ReadOnlySpan<byte> key, BigInteger sectorNum, int sectorSize)
         {
             byte[] buffer = input.ToArray();
@@ -14,12 +25,30 @@ namespace XTS.NET
             return buffer;
         }
 
+        /// <summary>
+        /// Decrypt multiple sectors of data using XTS mode
+        /// </summary>
+        /// <param name="alg">A SymmetricAlgorithm representing the underlying block cipher. In a regular scenario, you can use Aes.Create() to get this.</param>
+        /// <param name="input">The data to decrypt</param>
+        /// <param name="key">The key to use. Note that XTS mode uses a key twice the underlying size of the block cipher.</param>
+        /// <param name="sectorNum">The sector number, also known as the tweak. This is the equivalent of the IV/Nonce for other modes.</param>
+        /// <param name="sectorSize">The size of a sector. This function allows decrypting multiple sector. Use the Sector variants if you don't care about this.</param>
+        /// <returns>The decrypted data</returns>
         public static byte[] DecryptXts(this SymmetricAlgorithm alg, ReadOnlySpan<byte> input, ReadOnlySpan<byte> key, BigInteger sectorNum, int sectorSize)
         {
             byte[] buffer = input.ToArray();
             alg.DecryptXtsInPlace(buffer, key, sectorNum, sectorSize);
             return buffer;
         }
+
+        /// <summary>
+        /// Encrypt data using XTS mode
+        /// </summary>
+        /// <param name="alg">A SymmetricAlgorithm representing the underlying block cipher. In a regular scenario, you can use Aes.Create() to get this.</param>
+        /// <param name="input">The data to encrypt</param>
+        /// <param name="key">The key to use. Note that XTS mode uses a key twice the underlying size of the block cipher.</param>
+        /// <param name="sectorNum">The sector number, also known as the tweak. This is the equivalent of the IV/Nonce for other modes.</param>
+        /// <returns>The encrypted data</returns>
         public static byte[] EncryptXtsSector(this SymmetricAlgorithm alg, ReadOnlySpan<byte> input, ReadOnlySpan<byte> key, BigInteger sectorNum)
         {
             byte[] buffer = input.ToArray();
@@ -27,6 +56,14 @@ namespace XTS.NET
             return buffer;
         }
 
+        /// <summary>
+        /// Decrypt data using XTS mode
+        /// </summary>
+        /// <param name="alg">A SymmetricAlgorithm representing the underlying block cipher. In a regular scenario, you can use Aes.Create() to get this.</param>
+        /// <param name="input">The data to decrypt</param>
+        /// <param name="key">The key to use. Note that XTS mode uses a key twice the underlying size of the block cipher.</param>
+        /// <param name="sectorNum">The sector number, also known as the tweak. This is the equivalent of the IV/Nonce for other modes.</param>
+        /// <returns>The decrypted data</returns>
         public static byte[] DecryptXtsSector(this SymmetricAlgorithm alg, ReadOnlySpan<byte> input, ReadOnlySpan<byte> key, BigInteger sectorNum)
         {
             byte[] buffer = input.ToArray();
@@ -34,6 +71,15 @@ namespace XTS.NET
             return buffer;
         }
 
+        /// <summary>
+        /// Encrypt multiple sectors of data using XTS mode in place
+        /// </summary>
+        /// <param name="alg">A SymmetricAlgorithm representing the underlying block cipher. In a regular scenario, you can use Aes.Create() to get this.</param>
+        /// <param name="buffer">The data to encrypt, and also the output buffer</param>
+        /// <param name="key">The key to use. Note that XTS mode uses a key twice the underlying size of the block cipher.</param>
+        /// <param name="sectorNum">The sector number, also known as the tweak. This is the equivalent of the IV/Nonce for other modes.</param>
+        /// <param name="sectorSize">The size of a sector. This function allows encrypting multiple sector. Use the Sector variants if you don't care about this.</param>
+        /// <returns>The encrypted data</returns>
         public static void EncryptXtsInPlace(this SymmetricAlgorithm alg, byte[] buffer, ReadOnlySpan<byte> key, BigInteger sectorNum, int sectorSize)
         {
             SetupRawCipher(alg);
@@ -64,6 +110,15 @@ namespace XTS.NET
             }
         }
 
+        /// <summary>
+        /// Decrypt multiple sectors of data using XTS mode in place
+        /// </summary>
+        /// <param name="alg">A SymmetricAlgorithm representing the underlying block cipher. In a regular scenario, you can use Aes.Create() to get this.</param>
+        /// <param name="buffer">The data to decrypt, and also the output buffer</param>
+        /// <param name="key">The key to use. Note that XTS mode uses a key twice the underlying size of the block cipher.</param>
+        /// <param name="sectorNum">The sector number, also known as the tweak. This is the equivalent of the IV/Nonce for other modes.</param>
+        /// <param name="sectorSize">The size of a sector. This function allows encrypting multiple sector. Use the Sector variants if you don't care about this.</param>
+        /// <returns>The decrypted data</returns>
         public static void DecryptXtsInPlace(this SymmetricAlgorithm alg, byte[] buffer, ReadOnlySpan<byte> key, BigInteger sectorNum, int sectorSize)
         {
             SetupRawCipher(alg);
@@ -94,6 +149,14 @@ namespace XTS.NET
             }
         }
 
+        /// <summary>
+        /// Encrypt data using XTS mode in place
+        /// </summary>
+        /// <param name="alg">A SymmetricAlgorithm representing the underlying block cipher. In a regular scenario, you can use Aes.Create() to get this.</param>
+        /// <param name="input">The data to encrypt and also the output buffer</param>
+        /// <param name="key">The key to use. Note that XTS mode uses a key twice the underlying size of the block cipher.</param>
+        /// <param name="sectorNum">The sector number, also known as the tweak. This is the equivalent of the IV/Nonce for other modes.</param>
+        /// <returns>The encrypted data</returns>
         public static void EncryptXtsSectorInPlace(this SymmetricAlgorithm alg, byte[] buffer, ReadOnlySpan<byte> key, BigInteger sectorNum)
         {
             SetupRawCipher(alg);
@@ -108,6 +171,14 @@ namespace XTS.NET
             ProcessXtsSector(encryptor, buffer, 0, buffer.Length, tweak, false);
         }
 
+        /// <summary>
+        /// Decrypt data using XTS mode in place
+        /// </summary>
+        /// <param name="alg">A SymmetricAlgorithm representing the underlying block cipher. In a regular scenario, you can use Aes.Create() to get this.</param>
+        /// <param name="input">The data to decrypt and also the output buffer</param>
+        /// <param name="key">The key to use. Note that XTS mode uses a key twice the underlying size of the block cipher.</param>
+        /// <param name="sectorNum">The sector number, also known as the tweak. This is the equivalent of the IV/Nonce for other modes.</param>
+        /// <returns>The decrypted data</returns>
         public static void DecryptXtsSectorInPlace(this SymmetricAlgorithm alg, byte[] buffer, ReadOnlySpan<byte> key, BigInteger sectorNum)
         {
             SetupRawCipher(alg);
@@ -122,6 +193,16 @@ namespace XTS.NET
             ProcessXtsSector(decryptor, buffer, 0, buffer.Length, tweak, true);
         }
 
+        /// <summary>
+        /// The core XTS function. This encrypts/decrypts a sector in place
+        /// </summary>
+        /// <param name="alg">The block cipher encrypt/decrypt interface</param>
+        /// <param name="buffer">The input and output buffer</param>
+        /// <param name="bufferOffset">The offset where to start processing</param>
+        /// <param name="bufferLength">The length of the data to process</param>
+        /// <param name="tweak">The initial tweak value, which is an encryption of the sector number</param>
+        /// <param name="decrypt">A bool telling weither or not this is a decryption. There is a single place where the function may differ based on that.</param>
+        /// <exception cref="ArgumentException">Throws if the sector has less data then a full block, since this case is unsupported by XTS by design.</exception>
         private static void ProcessXtsSector(ICryptoTransform alg, byte[] buffer, int bufferOffset, int bufferLength, Span<byte> tweak, bool decrypt)
         {
             int blockSize = alg.InputBlockSize;
@@ -187,6 +268,13 @@ namespace XTS.NET
             }
         }
 
+        /// <summary>
+        /// Encrypt the sector number into a tweak using K2
+        /// </summary>
+        /// <param name="alg">The block cipher to use</param>
+        /// <param name="key">The key to use</param>
+        /// <param name="sectorNum">The sector number</param>
+        /// <returns>The tweak</returns>
         private static byte[] EncryptTweak(SymmetricAlgorithm alg, ReadOnlySpan<byte> key, BigInteger sectorNum)
         {
             int blockSize = alg.BlockSize / 8;
@@ -204,6 +292,10 @@ namespace XTS.NET
             return tweak;
         }
 
+        /// <summary>
+        /// Setup the block cipher to be ECB without padding, since we are implementing both manually
+        /// </summary>
+        /// <param name="alg"></param>
         private static void SetupRawCipher(SymmetricAlgorithm alg)
         {
             // Setup for raw cipher, without mode or padding
@@ -211,6 +303,13 @@ namespace XTS.NET
             alg.Padding = PaddingMode.None;
         }
 
+        /// <summary>
+        /// Execute the block cipher
+        /// </summary>
+        /// <param name="alg">The block cipher implementation</param>
+        /// <param name="buffer">The working buffer</param>
+        /// <param name="bufferOffset">The offset from which the data is being worked on in the buffer</param>
+        /// <param name="tweak">The tweak</param>
         private static void TransformBlock(ICryptoTransform alg, byte[] buffer, int bufferOffset, ReadOnlySpan<byte> tweak)
         {
             // Get block size from the transform
@@ -225,6 +324,11 @@ namespace XTS.NET
             XorBlocksInPlace(tweak, outputSpan);
         }
 
+        /// <summary>
+        /// XOR a span into another
+        /// </summary>
+        /// <param name="input">The input block, which is XORed into the output</param>
+        /// <param name="output">The receiving buffer</param>
         private static void XorBlocksInPlace(ReadOnlySpan<byte> input, Span<byte> output)
         {
             for (int i = 0; i < output.Length; i++)
@@ -233,6 +337,11 @@ namespace XTS.NET
             }
         }
 
+        /// <summary>
+        /// Swap data from one span to another.
+        /// </summary>
+        /// <param name="x">The first span</param>
+        /// <param name="y">The second span</param>
         private static void SwapSpan(Span<byte> x, Span<byte> y)
         {
             for (int i = 0; i < x.Length; i++)
@@ -268,7 +377,6 @@ namespace XTS.NET
 
             if (carry)
             {
-                // Derived from polynomial x^128 + x^7 + x^2 + x + 1
                 tweak[0] ^= GF_MOD;
             }
 
@@ -285,7 +393,6 @@ namespace XTS.NET
         {
             if (carry)
             {
-                // Derived from polynomial x^128 + x^7 + x^2 + x + 1
                 tweak[0] ^= GF_MOD;
             }
 
