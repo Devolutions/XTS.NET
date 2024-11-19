@@ -6,6 +6,8 @@ namespace XTS.NET
 {
     public static class XTS
     {
+        private const byte GF_MOD = 135;
+
         public static void EncryptXts(this SymmetricAlgorithm alg, byte[] buffer, ReadOnlySpan<byte> key, BigInteger sectorNum, int sectorSize)
         {
             SetupRawCipher(alg);
@@ -119,14 +121,14 @@ namespace XTS.NET
 
             if (decrypt && needsCiphertextStealing)
             {
-                // We backup the tweak, re-multiply it and restore it after
-                byte[] oldTweak = tweak.ToArray();
-                GaloisMultiplyByTwo(tweak);
+                // We fast forward the multiplication here
+                bool carry = GaloisMultiplyByTwo(tweak);
 
                 int blockStart = bufferOffset + (nFullBlocks - 1) * blockSize;
                 TransformBlock(alg, buffer, blockStart, tweak);
 
-                tweak = oldTweak;
+                // We backtrack the multiplication
+                GaloisUnmultiplyByTwo(tweak, carry);
             }
             else
             {
@@ -215,7 +217,12 @@ namespace XTS.NET
             }
         }
 
-        private static void GaloisMultiplyByTwo(Span<byte> tweak)
+        /// <summary>
+        /// Galois Field multiplication by 2
+        /// </summary>
+        /// <param name="tweak"></param>
+        /// <returns></returns>
+        private static bool GaloisMultiplyByTwo(Span<byte> tweak)
         {
             bool carry = false;
             for (int i = 0; i < tweak.Length; i++)
@@ -236,7 +243,44 @@ namespace XTS.NET
             if (carry)
             {
                 // Derived from polynomial x^128 + x^7 + x^2 + x + 1
-                tweak[0] ^= 135;
+                tweak[0] ^= GF_MOD;
+            }
+
+            return carry;
+        }
+
+        /// <summary>
+        /// Reverse the galois field multiplication. This is used once during decryption to avoid an allocation
+        /// </summary>
+        /// <param name="tweak">The tweak to reverse</param>
+        /// <param name="carry">The carry flag of the last multiplication</param>
+        /// <returns></returns>
+        private static void GaloisUnmultiplyByTwo(Span<byte> tweak, bool carry)
+        {
+            if (carry)
+            {
+                // Derived from polynomial x^128 + x^7 + x^2 + x + 1
+                tweak[0] ^= GF_MOD;
+            }
+
+            int newCarry = 0;
+            for (int i = tweak.Length - 1; i >= 0; i--)
+            {
+                int oldCarry = newCarry;
+
+                // Check if there is a carry for this shift
+                newCarry = tweak[i] & 1;
+
+                // Shift left
+                tweak[i] >>= 1;
+
+                // Carry over bit from last carry
+                tweak[i] |= (byte)(oldCarry << 7);
+            }
+
+            if (carry)
+            {
+                tweak[tweak.Length - 1] |= 0x80;
             }
         }
     }
