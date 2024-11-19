@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTS.NET", "src\XTS.NET.csproj", "{DB2D8001-9562-4042-883D-69D4C75E647C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTS.NET.Tests", "tests\XTS.NET.Tests.csproj", "{AE300E49-FCCD-45D6-A32C-6E133148DF02}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTS.NET.Benchmarks", "XTS.NET.Benchmarks\XTS.NET.Benchmarks.csproj", "{652E2CC9-C97C-479E-82E4-F9DEF839149C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTS.NET", "src\XTS.NET.csproj", "{69966EA9-5369-4673-A404-EAA548CCF722}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,10 +18,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DB2D8001-9562-4042-883D-69D4C75E647C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DB2D8001-9562-4042-883D-69D4C75E647C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DB2D8001-9562-4042-883D-69D4C75E647C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DB2D8001-9562-4042-883D-69D4C75E647C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AE300E49-FCCD-45D6-A32C-6E133148DF02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE300E49-FCCD-45D6-A32C-6E133148DF02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE300E49-FCCD-45D6-A32C-6E133148DF02}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -30,5 +26,9 @@ Global
 		{652E2CC9-C97C-479E-82E4-F9DEF839149C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{652E2CC9-C97C-479E-82E4-F9DEF839149C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{652E2CC9-C97C-479E-82E4-F9DEF839149C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69966EA9-5369-4673-A404-EAA548CCF722}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69966EA9-5369-4673-A404-EAA548CCF722}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69966EA9-5369-4673-A404-EAA548CCF722}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69966EA9-5369-4673-A404-EAA548CCF722}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
