@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageLicenseExpression>MIT OR Apache-2.0</PackageLicenseExpression>
+    <Authors>zer0x64 (Philippe Dugre)</Authors>
+    <Company>Devolutions</Company>
+    <Description>A pure C# implementation of the XTS encryption mode, mostly used for disk encryption.</Description>
+    <RepositoryUrl>https://github.com/Devolutions/XTS.NET</RepositoryUrl>
+    <PackageId>Devolutions.XTS.NET</PackageId>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+</Project>
