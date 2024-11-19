@@ -38,8 +38,7 @@ jobs:
         CI: true
 
     - name: Extract Artifacts
-      run: |
-        7z x nugets.zip -o./nugets
+      run: 7z x nugets.zip -o./nugets
 
     - name: Publish NuGet
       if: ${{ inputs.publish_nuget }}
