@@ -155,7 +155,7 @@ public class XtsNetBenchmark
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
 
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
     }
 
     [Benchmark]
@@ -165,6 +165,6 @@ public class XtsNetBenchmark
 
         byte[] plaintext = (byte[])expectedCiphertext.Clone();
 
-        aes.DecryptXtsSector(plaintext, key, sector);
+        aes.DecryptXtsSectorInPlace(plaintext, key, sector);
     }
 }

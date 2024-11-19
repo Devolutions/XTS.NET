@@ -32,10 +32,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -69,10 +69,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -106,10 +106,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -263,10 +263,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -420,10 +420,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -577,10 +577,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -734,10 +734,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -891,10 +891,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -1048,10 +1048,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -1209,10 +1209,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -1370,10 +1370,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -1531,10 +1531,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -1692,10 +1692,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -1853,10 +1853,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -1888,10 +1888,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -1923,10 +1923,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -1958,10 +1958,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -1993,10 +1993,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 
@@ -2150,10 +2150,10 @@ public class IeeeVectorsTests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
         
-        aes.EncryptXtsSector(ciphertext, key, sector);
+        aes.EncryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedCiphertext));
 
-        aes.DecryptXtsSector(ciphertext, key, sector);
+        aes.DecryptXtsSectorInPlace(ciphertext, key, sector);
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
 

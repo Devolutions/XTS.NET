@@ -7,8 +7,34 @@ namespace XTS.NET
     public static class XTS
     {
         private const byte GF_MOD = 135;
+        public static byte[] EncryptXts(this SymmetricAlgorithm alg, ReadOnlySpan<byte> input, ReadOnlySpan<byte> key, BigInteger sectorNum, int sectorSize)
+        {
+            byte[] buffer = input.ToArray();
+            alg.EncryptXtsInPlace(buffer, key, sectorNum, sectorSize);
+            return buffer;
+        }
 
-        public static void EncryptXts(this SymmetricAlgorithm alg, byte[] buffer, ReadOnlySpan<byte> key, BigInteger sectorNum, int sectorSize)
+        public static byte[] DecryptXts(this SymmetricAlgorithm alg, ReadOnlySpan<byte> input, ReadOnlySpan<byte> key, BigInteger sectorNum, int sectorSize)
+        {
+            byte[] buffer = input.ToArray();
+            alg.DecryptXtsInPlace(buffer, key, sectorNum, sectorSize);
+            return buffer;
+        }
+        public static byte[] EncryptXtsSector(this SymmetricAlgorithm alg, ReadOnlySpan<byte> input, ReadOnlySpan<byte> key, BigInteger sectorNum)
+        {
+            byte[] buffer = input.ToArray();
+            alg.EncryptXtsSectorInPlace(buffer, key, sectorNum);
+            return buffer;
+        }
+
+        public static byte[] DecryptXtsSector(this SymmetricAlgorithm alg, ReadOnlySpan<byte> input, ReadOnlySpan<byte> key, BigInteger sectorNum)
+        {
+            byte[] buffer = input.ToArray();
+            alg.DecryptXtsSectorInPlace(buffer, key, sectorNum);
+            return buffer;
+        }
+
+        public static void EncryptXtsInPlace(this SymmetricAlgorithm alg, byte[] buffer, ReadOnlySpan<byte> key, BigInteger sectorNum, int sectorSize)
         {
             SetupRawCipher(alg);
 
@@ -38,7 +64,7 @@ namespace XTS.NET
             }
         }
 
-        public static void DecryptXts(this SymmetricAlgorithm alg, byte[] buffer, ReadOnlySpan<byte> key, BigInteger sectorNum, int sectorSize)
+        public static void DecryptXtsInPlace(this SymmetricAlgorithm alg, byte[] buffer, ReadOnlySpan<byte> key, BigInteger sectorNum, int sectorSize)
         {
             SetupRawCipher(alg);
 
@@ -68,7 +94,7 @@ namespace XTS.NET
             }
         }
 
-        public static void EncryptXtsSector(this SymmetricAlgorithm alg, byte[] buffer, ReadOnlySpan<byte> key, BigInteger sectorNum)
+        public static void EncryptXtsSectorInPlace(this SymmetricAlgorithm alg, byte[] buffer, ReadOnlySpan<byte> key, BigInteger sectorNum)
         {
             SetupRawCipher(alg);
 
@@ -82,7 +108,7 @@ namespace XTS.NET
             ProcessXtsSector(encryptor, buffer, 0, buffer.Length, tweak, false);
         }
 
-        public static void DecryptXtsSector(this SymmetricAlgorithm alg, byte[] buffer, ReadOnlySpan<byte> key, BigInteger sectorNum)
+        public static void DecryptXtsSectorInPlace(this SymmetricAlgorithm alg, byte[] buffer, ReadOnlySpan<byte> key, BigInteger sectorNum)
         {
             SetupRawCipher(alg);
 

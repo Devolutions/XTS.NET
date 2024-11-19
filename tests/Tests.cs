@@ -24,12 +24,12 @@ public class Tests
         Aes cipher = Aes.Create();
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
-        cipher.EncryptXts(ciphertext, key, 0, 520);
+        cipher.EncryptXtsInPlace(ciphertext, key, 0, 520);
 
         // Ensures some form of data transformation happened
         Assert.That(ciphertext, Is.Not.EqualTo(expectedPlaintext));
 
-        cipher.DecryptXts(ciphertext, key, 0, 520);
+        cipher.DecryptXtsInPlace(ciphertext, key, 0, 520);
 
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
@@ -54,12 +54,12 @@ public class Tests
         Aes cipher = Aes.Create();
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
-        cipher.EncryptXts(ciphertext, key, 0, 520);
+        cipher.EncryptXtsInPlace(ciphertext, key, 0, 520);
 
         // Ensures some form of data transformation happened
         Assert.That(ciphertext, Is.Not.EqualTo(expectedPlaintext));
 
-        cipher.DecryptXts(ciphertext, key, 0, 520);
+        cipher.DecryptXtsInPlace(ciphertext, key, 0, 520);
 
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
@@ -80,12 +80,12 @@ public class Tests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
 
-        cipher.EncryptXts(ciphertext, key, 0, 520);
+        cipher.EncryptXtsInPlace(ciphertext, key, 0, 520);
 
         // Ensures some form of data transformation happened
         Assert.That(ciphertext, Is.Not.EqualTo(expectedPlaintext));
 
-        cipher.DecryptXts(ciphertext, key, 0, 520);
+        cipher.DecryptXtsInPlace(ciphertext, key, 0, 520);
 
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
@@ -106,12 +106,12 @@ public class Tests
 
         byte[] ciphertext = (byte[])expectedPlaintext.Clone();
 
-        cipher.EncryptXts(ciphertext, key, 0, 100);
+        cipher.EncryptXtsInPlace(ciphertext, key, 0, 100);
 
         // Ensures some form of data transformation happened
         Assert.That(ciphertext, Is.Not.EqualTo(expectedPlaintext));
 
-        cipher.DecryptXts(ciphertext, key, 0, 100);
+        cipher.DecryptXtsInPlace(ciphertext, key, 0, 100);
 
         Assert.That(ciphertext, Is.EqualTo(expectedPlaintext));
     }
