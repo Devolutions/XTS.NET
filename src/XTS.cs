@@ -229,7 +229,7 @@ namespace XTS.NET
             if (decrypt && needsCiphertextStealing)
             {
                 // We fast forward the multiplication here
-                bool carry = GaloisMultiplyByTwo(tweak);
+                byte carry = GaloisMultiplyByTwo(tweak);
 
                 int blockStart = bufferOffset + (nFullBlocks - 1) * blockSize;
                 TransformBlock(alg, buffer, blockStart, tweak);
@@ -346,9 +346,7 @@ namespace XTS.NET
         {
             for (int i = 0; i < x.Length; i++)
             {
-                byte tmp = x[i];
-                x[i] = y[i];
-                y[i] = tmp;
+                (x[i], y[i]) = (y[i], x[i]);
             }
         }
 
@@ -357,16 +355,16 @@ namespace XTS.NET
         /// </summary>
         /// <param name="tweak"></param>
         /// <returns></returns>
-        private static bool GaloisMultiplyByTwo(Span<byte> tweak)
+        private static byte GaloisMultiplyByTwo(Span<byte> tweak)
         {
-            bool carry = false;
+            byte carry = 0;
             for (int i = 0; i < tweak.Length; i++)
             {
                 // Save carry from previous byte
-                byte oldCarry = (byte)(carry ? 1 : 0);
+                byte oldCarry = carry;
 
                 // Check if there is a carry for this shift
-                carry = (tweak[i] & 0x80) > 0;
+                carry = (byte)(tweak[i] >> 7);
 
                 // Shift left
                 tweak[i] <<= 1;
@@ -375,10 +373,8 @@ namespace XTS.NET
                 tweak[i] |= oldCarry;
             }
 
-            if (carry)
-            {
-                tweak[0] ^= GF_MOD;
-            }
+            // Binary logic, equivalent to XORing by GF_MOD if there's a carry, but constant-time
+            tweak[0] ^= (byte)((byte)-carry & GF_MOD);
 
             return carry;
         }
@@ -389,12 +385,10 @@ namespace XTS.NET
         /// <param name="tweak">The tweak to reverse</param>
         /// <param name="carry">The carry flag of the last multiplication</param>
         /// <returns></returns>
-        private static void GaloisUnmultiplyByTwo(Span<byte> tweak, bool carry)
+        private static void GaloisUnmultiplyByTwo(Span<byte> tweak, byte carry)
         {
-            if (carry)
-            {
-                tweak[0] ^= GF_MOD;
-            }
+            // Binary logic, equivalent to XORing by GF_MOD if there's a carry, but constant-time
+            tweak[0] ^= (byte)((byte)-carry & GF_MOD);
 
             int newCarry = 0;
             for (int i = tweak.Length - 1; i >= 0; i--)
@@ -411,10 +405,8 @@ namespace XTS.NET
                 tweak[i] |= (byte)(oldCarry << 7);
             }
 
-            if (carry)
-            {
-                tweak[tweak.Length - 1] |= 0x80;
-            }
+            // Insert back the carry
+            tweak[^1] |= (byte)(carry << 7);
         }
     }
 }
